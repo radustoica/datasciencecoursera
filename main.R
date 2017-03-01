@@ -48,11 +48,15 @@ f1$FATALITIES = as.integer(as.character(f1$FATALITIES));
 
 ggplot(i1, aes(x = EVTYPE, y = INJURIES)) 
     + geom_bar(stat = "identity", fill = "lightblue", color = "black") 
-    + theme_dark();
+    + theme_dark()
+    + ggtitle("Fatalities across USA by event") 
+    + geom_text(aes(label = INJURIES, vjust = 1.0));
 
 ggplot(f1, aes(x = EVTYPE, y = FATALITIES)) 
     + geom_bar(stat = "identity", fill = "lightblue", color = "black") 
-    + theme_dark();
+    + theme_dark()
+    + ggtitle("Fatalities across USA by event") 
+    + geom_text(aes(label = FATALITIES, vjust = 1.0));
 
 
 
