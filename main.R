@@ -58,5 +58,12 @@ ggplot(f1, aes(x = EVTYPE, y = FATALITIES))
     + ggtitle("Fatalities across USA by event") 
     + geom_text(aes(label = FATALITIES, vjust = 1.0));
 
+x = merge(f1, i1);
+
+ggplot(data = x, aes(x = EVTYPE, y = interaction(FATALITIES, INJURIES, sep = " + "))) + 
+	geom_bar(stat = "sum", aes(y = FATALITIES, color = "pink")) + 
+	geom_bar(stat = "sum", aes(y = INJURIES, color = "black")) + 
+	geom_text(aes(label = interaction(FATALITIES, INJURIES, sep = " + "), vjust = -0.25));
+
 
 
