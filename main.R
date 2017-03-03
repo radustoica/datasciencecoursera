@@ -52,13 +52,13 @@ require(gridExtra);
 g1 = ggplot(i1, aes(x = EVTYPE, y = INJURIES)) +
     geom_bar(stat = "identity", fill = "lightblue", color = "black") +
     theme_dark() + 
-    ggtitle("Top injuries across US caused by harmful natural event by type") +
+    ggtitle("Top recorded injuries across US caused by harmful natural event by type between 1950 and 2011") +
     geom_text(aes(label = INJURIES, vjust = -0.25)) ;
 
 g2 = ggplot(f1, aes(x = EVTYPE, y = FATALITIES)) +
     geom_bar(stat = "identity", fill = "lightblue", color = "black") +
     theme_dark() + 
-    ggtitle("Top fatalities across US caused by harmful natural event by type") +
+    ggtitle("Top recorded fatalities across US caused by harmful natural event by type between 1950 and 2011") +
     geom_text(aes(label = FATALITIES, vjust = -0.25));
 	
 # x = merge(f1, i1);
