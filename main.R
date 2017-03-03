@@ -46,19 +46,29 @@ names(f1) = c("EVTYPE", "FATALITIES");
 i1$INJURIES = as.integer(as.character(i1$INJURIES));
 f1$FATALITIES = as.integer(as.character(f1$FATALITIES));
 
-ggplot(i1, aes(x = EVTYPE, y = INJURIES)) 
-    + geom_bar(stat = "identity", fill = "lightblue", color = "black") 
-    + theme_dark()
-    + ggtitle("Fatalities across USA by event") 
-    + geom_text(aes(label = INJURIES, vjust = 1.0));
+require(ggplot2);
+require(gridExtra);
 
-ggplot(f1, aes(x = EVTYPE, y = FATALITIES)) 
-    + geom_bar(stat = "identity", fill = "lightblue", color = "black") 
-    + theme_dark()
-    + ggtitle("Fatalities across USA by event") 
-    + geom_text(aes(label = FATALITIES, vjust = 1.0));
+g1 = ggplot(i1, aes(x = EVTYPE, y = INJURIES)) +
+    geom_bar(stat = "identity", fill = "lightblue", color = "black") +
+    theme_dark() +
+    ggtitle("Top injuries across USA by natural event type") +
+    geom_text(aes(label = INJURIES, vjust = -0.25));
 
+g2 = ggplot(f1, aes(x = EVTYPE, y = FATALITIES)) +
+    geom_bar(stat = "identity", fill = "lightblue", color = "black") +
+    theme_dark() + 
+    ggtitle("Top fatalities across USA by natural event type") +
+    geom_text(aes(label = FATALITIES, vjust = -0.25));
+
+grid.arrange(g1, g2, nrow = 2);
+	
 x = merge(f1, i1);
+x$total = x$FATALITIES + x$INJURIES;
+
+ggplot(data = x, aes(x = EVTYPE, y = interaction(FATALITIES, INJURIES, sep = " + "))) + 
+	geom_bar(stat = "sum") + theme_dark() +
+	geom_text(aes(label = total, vjust = -0.25));
 
 ggplot(data = x, aes(x = EVTYPE, y = interaction(FATALITIES, INJURIES, sep = " + "))) + 
 	geom_bar(stat = "sum", aes(y = FATALITIES, color = "pink")) + 
